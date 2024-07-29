@@ -1,6 +1,6 @@
 import Notification from "../models/notification.model.js";
 import Post from "../models/post.model.js";
-import User from "../models/user.models.js";
+import User from "../models/user.model.js";
 import { v2 as cloudinary } from "cloudinary";
 
 export const createPost = async (req, res) => {
@@ -205,9 +205,9 @@ export const getFollowingPosts = async (req, res) => {
 
 export const getUserPosts = async (req, res) => {
 	try {
-		const { userName } = req.params;
+		const { username } = req.params;
 
-		const user = await User.findOne({ userName });
+		const user = await User.findOne({ username });
 		if (!user) return res.status(404).json({ error: "User not found" });
 
 		const posts = await Post.find({ user: user._id })

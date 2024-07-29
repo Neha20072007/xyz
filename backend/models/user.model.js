@@ -2,19 +2,19 @@ import mongoose from 'mongoose';
 
 const userSchema = new mongoose.Schema( 
     {
-    userName: {
+    username: {
         type: String,
         required: true,
-        unique: true
+        unique: true,
     },
     fullName: {
         type: String,
-        required: true
+        required: true,
     },
     password: {
         type: String,
         required: true,
-        minLength: 8
+        minLength: 8,
     },
     email: {
         type: String,
@@ -25,14 +25,14 @@ const userSchema = new mongoose.Schema(
         {
             type: mongoose.Schema.Types.ObjectId,
             ref: "User",
-            default: []
+            default: [],
         }
     ],
     following: [
         {
             type: mongoose.Schema.Types.ObjectId,
             ref: "User",
-            default: []
+            default: [],
         }
     ],
     profileImg: {

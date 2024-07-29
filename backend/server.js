@@ -12,6 +12,7 @@ import notificationRoutes from "./routes/notification.route.js";
 import connectMongoDB from "./db/connectMongoDB.js";
 
 dotenv.config();
+// require("dotenv").config();
 
 cloudinary.config({
 	cloud_name: process.env.CLOUDINARY_CLOUD_NAME,

@@ -1,20 +1,20 @@
-import User from '../models/user.models.js';
+import User from '../models/user.model.js';
 import bcrypt from 'bcryptjs';
 import { generateTokenAndSetCookie } from '../lib/utils/generateTokens.js';
-import { protectRoute } from '../middleWare/protectRoute.js';
+// import { protectRoute } from '../middleWare/protectRoute.js';
 
 export const signup = async (req , res) => {
         try {
-            const { fullName, userName, email, password } = req.body;
-            //const user = await User.create({fullName, userName, email, password});  
+            const { fullName, username, email, password } = req.body;
+            //const user = await User.create({fullName, username, email, password});  
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (!emailRegex.test(email)) {
                 return res.status(400).json({ error: "Invalid Email ID Format "});
             }
 
-            const existingUser = await User.findOne({ userName });
+            const existingUser = await User.findOne({ username });
             if (existingUser){
-                return res.status(400).json({ error: "Username not available :(" });
+                return res.status(400).json({ error: "username not available :(" });
             }
 
             const existingEmail = await User.findOne({ email });
@@ -32,19 +32,19 @@ export const signup = async (req , res) => {
 
             const newUser = new User ({
                 fullName,
-                userName,
+                username,
                 email,
                 password: hashedPassword
             });
 
             if (newUser) {
-                generateTokenAndSetCookie(newUser._id, res)
+                generateTokenAndSetCookie(newUser._id, res);
                 await newUser.save();
 
                 res.status(201).json({
                     _id: newUser._id,
                     fullName: newUser.fullName,
-                    userName: newUser.userName,
+                    username: newUser.username,
                     email: newUser.email,
                     followers: newUser.followers,
                     following: newUser.following,
@@ -58,12 +58,12 @@ export const signup = async (req , res) => {
                     console.log("Error in signup controller", error.message);
 		            res.status(500).json({ error: "Internal Server Error" });
         }
-}
+};
 
 export const login = async (req, res) => {
 	try {
-		const { userName, password } = req.body;
-		const user = await User.findOne({ userName });
+		const { username, password } = req.body;
+		const user = await User.findOne({ username });
 		const isPasswordCorrect = await bcrypt.compare(password, user?.password || "");
 
 		if (!user || !isPasswordCorrect) {
@@ -75,7 +75,7 @@ export const login = async (req, res) => {
 		res.status(200).json({
 			_id: user._id,
 			fullName: user.fullName,
-			userName: user.userName,
+			username: user.username,
 			email: user.email,
 			followers: user.followers,
 			following: user.following,

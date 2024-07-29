@@ -2,13 +2,13 @@ import bcrypt from "bcryptjs";
 import { v2 as cloudinary } from "cloudinary";
 
 import Notification from "../models/notification.model.js";
-import User from "../models/user.models.js";
+import User from "../models/user.model.js";
 
 export const getUserProfile = async (req, res) => {
-	const { userName } = req.params;
+	const { username } = req.params;
 
 	try {
-		const user = await User.findOne({ userName }).select("-password");
+		const user = await User.findOne({ username }).select("-password");
 		if (!user) return res.status(404).json({ message: "User not found" });
 
 		res.status(200).json(user);
@@ -88,7 +88,7 @@ export const getSuggestedUsers = async (req, res) => {
 };
 
 export const updateUser = async (req, res) => {
-	const { fullName, email, userName, currentPassword, newPassword, bio, link } = req.body;
+	const { fullName, email, username, currentPassword, newPassword, bio, link } = req.body;
 	let { profileImg, coverImg } = req.body;
 
 	const userId = req.user._id;
@@ -133,7 +133,7 @@ export const updateUser = async (req, res) => {
 
 		user.fullName = fullName || user.fullName;
 		user.email = email || user.email;
-		user.username = userName || user.username;
+		user.username = username || user.username;
 		user.bio = bio || user.bio;
 		user.link = link || user.link;
 		user.profileImg = profileImg || user.profileImg;
