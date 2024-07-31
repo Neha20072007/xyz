@@ -130,10 +130,10 @@ const Post = ({ post }) => {
 				</div>
 				<div className='flex flex-col flex-1'>
 					<div className='flex gap-2 items-center'>
-						<Link to={`/profile/${postOwner.username}`} className='font-bold'>
+						<Link to={`/profile/${postOwner.username}`} className='text-primary font-bold'>
 							{postOwner.fullName}
 						</Link>
-						<span className='text-gray-700 flex gap-1 text-sm'>
+						<span className='text-secondary flex gap-1 text-sm'>
 							<Link to={`/profile/${postOwner.username}`}>@{postOwner.username}</Link>
 							<span>·</span>
 							<span>{formattedDate}</span>
@@ -153,7 +153,7 @@ const Post = ({ post }) => {
 						{post.img && (
 							<img
 								src={post.img}
-								className='h-80 object-contain rounded-lg border border-gray-700'
+								className='h-80 object-contain rounded-lg border border-secondary'
 								alt=''
 							/>
 						)}
@@ -164,19 +164,19 @@ const Post = ({ post }) => {
 								className='flex gap-1 items-center cursor-pointer group'
 								onClick={() => document.getElementById("comments_modal" + post._id).showModal()}
 							>
-								<FaRegComment className='w-4 h-4  text-slate-500 group-hover:text-sky-400' />
-								<span className='text-sm text-slate-500 group-hover:text-sky-400'>
+								<FaRegComment className='w-4 h-4  text-secondary group-hover:text-sky-400' />
+								<span className='text-sm text-primary group-hover:text-secondary'>
 									{post.comments.length}
 								</span>
 							</div>
-							{/* We're using Modal Component from DaisyUI */}
+							
 							<dialog id={`comments_modal${post._id}`} className='modal border-none outline-none'>
-								<div className='modal-box rounded border border-gray-600'>
-									<h3 className='font-bold text-lg mb-4'>COMMENTS</h3>
+								<div className='modal-box rounded border border-primary'>
+									<h3 className='font-bold text-primary text-lg mb-4'>COMMENTS</h3>
 									<div className='flex flex-col gap-3 max-h-60 overflow-auto'>
 										{post.comments.length === 0 && (
-											<p className='text-sm text-slate-500'>
-												No comments yet 🤔 Be the first one 😉
+											<p className='text-sm text-secondary'>
+												Brewing some thoughts 🤔 ? We will let you cook 😉👩‍🍳
 											</p>
 										)}
 										{post.comments.map((comment) => (
@@ -190,23 +190,23 @@ const Post = ({ post }) => {
 												</div>
 												<div className='flex flex-col'>
 													<div className='flex items-center gap-1'>
-														<span className='font-bold'>{comment.user.fullName}</span>
-														<span className='text-gray-700 text-sm'>
+														<span className='text-primary font-bold'>{comment.user.fullName}</span>
+														<span className='text-secondary text-sm'>
 															@{comment.user.username}
 														</span>
 													</div>
-													<div className='text-sm'>{comment.text}</div>
+													<div className='text-sm text-secondary'>{comment.text}</div>
 												</div>
 											</div>
 										))}
 									</div>
 									<form
-										className='flex gap-2 items-center mt-4 border-t border-gray-600 pt-2'
+										className='flex gap-2 items-center mt-4 border-t border-secondary pt-2'
 										onSubmit={handlePostComment}
 									>
 										<textarea
-											className='textarea w-full p-1 rounded text-md resize-none border focus:outline-none  border-gray-800'
-											placeholder='Add a comment...'
+											className='textarea w-full p-1 text-secondary rounded text-md resize-none border focus:outline-none  border-primary'
+											placeholder='Brew a comment 🌿...'
 											value={comment}
 											onChange={(e) => setComment(e.target.value)}
 										/>
@@ -242,7 +242,7 @@ const Post = ({ post }) => {
 							</div>
 						</div>
 						<div className='flex w-1/3 justify-end gap-2 items-center'>
-							<FaRegBookmark className='w-4 h-4 text-slate-500 cursor-pointer' />
+							<FaRegBookmark className='w-4 h-4 text-primary cursor-pointer' />
 						</div>
 					</div>
 				</div>
