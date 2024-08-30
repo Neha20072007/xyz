@@ -47,9 +47,9 @@ export const POSTS = [
 		text: "Freedom",
 		img: "/posts/post2.png",
 		user: {
-			username: "johndoe",
+			username: "joe",
 			profileImg: "/avatars/boy3.png",
-			fullName: "John Doe",
+			fullName: "Joe",
 		},
 		comments: [],
 		likes: ["6658s891", "6658s892", "6658s893", "6658s894", "6658s895", "6658s896"],
